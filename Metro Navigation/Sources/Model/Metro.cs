@@ -83,7 +83,7 @@ namespace Metro_Navigation.Sources.Model
                 while (!parser.EndOfData)
                 {
                     string[] fields = parser.ReadFields();        
-                    connections.Add(Convert.ToUInt16(fields[0]), Convert.ToUInt16(fields[1]));
+                    //connections.Add(Convert.ToUInt16(fields[0]), Convert.ToUInt16(fields[1]));
                     graph.AddEdge(Convert.ToUInt16(fields[0]), Convert.ToUInt16(fields[1]));
                 }
             }

@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Metro_Navigation"
         mc:Ignorable="d"
+        xmlns:s="clr-namespace:Metro_Navigation.Sources.View"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <s:StationControl
+            StationName="FUGIHOJ" 
+            StationColor="AliceBlue"
+            Width="100"
+            Height="100"
+            ></s:StationControl>
     </Grid>
 </Window>

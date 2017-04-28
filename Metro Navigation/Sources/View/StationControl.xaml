@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="Metro_Navigation.Sources.View.StationControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Metro_Navigation.Sources.View"
+             mc:Ignorable="d"
+             x:Name="SControl"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid>
+        <Ellipse 
+            Fill="{Binding Path=StationColor, ElementName=SControl}" 
+           />
+        <TextBlock Text="{Binding Path=StationName, ElementName=SControl}" 
+                   HorizontalAlignment="Center" 
+                   VerticalAlignment="Center"></TextBlock>
+        
+    </Grid>
+</UserControl>
