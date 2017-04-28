@@ -32,7 +32,7 @@ namespace Metro_Navigation
 
 
             metro.ConnectionsSrc = "data/connections.csv";
-            metro.NamesSrc = path+ "data/names.csv";
+            metro.NamesSrc = path+ "data/stations.csv";
             metro.LoadData();
             metro.GO(7, 21);
         }
