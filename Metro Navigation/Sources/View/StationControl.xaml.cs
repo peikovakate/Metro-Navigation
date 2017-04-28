@@ -30,6 +30,7 @@ namespace Metro_Navigation.Sources.View
         public StationControl()
         {
             InitializeComponent();
+            
         }
 
 

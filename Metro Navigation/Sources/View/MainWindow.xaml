@@ -6,7 +6,19 @@
         xmlns:local="clr-namespace:Metro_Navigation"
         mc:Ignorable="d"
         xmlns:s="clr-namespace:Metro_Navigation.Sources.View"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" 
+        Height="700" 
+        Width="700"
+        >
+   
     <Grid>
+        <s:MetroControl 
+            x:Name="MetroMap" 
+            Width="600"
+            Height="600"
+            StationsList="{Binding Path=MetroNavig.Stations}"
+            >
+            
+        </s:MetroControl>
     </Grid>
 </Window>

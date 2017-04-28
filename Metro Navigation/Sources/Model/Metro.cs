@@ -1,20 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.VisualBasic.FileIO;
+using System.ComponentModel;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 
 namespace Metro_Navigation.Sources.Model
 {
-    class Metro
+    class Metro: INotifyPropertyChanged
     {
+
+        #region Implement INotyfyPropertyChanged members
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        #endregion
 
         #region Constructor
         public Metro()
         {
             
         }
+
+
         #endregion
 
         #region Properties
+
+        private Dictionary<ushort, ushort> connections;
+        private GraphAdjList graph;
 
         private string namesSrc;
         public string NamesSrc
@@ -24,7 +45,7 @@ namespace Metro_Navigation.Sources.Model
                 if (namesSrc != value)
                 {
                     namesSrc = value;
-                    stations = new List<Station>();
+                    stations = new ObservableCollection<Station>();  
                 }
             }
         }
@@ -41,12 +62,18 @@ namespace Metro_Navigation.Sources.Model
             }
         }
 
-        private List<Station> stations;
-        private Dictionary<ushort, ushort> connections;
-        private GraphAdjList graph;
+        private ObservableCollection<Station> stations;
 
+        public ObservableCollection<Station> Stations
+        {
+            get { return stations; }
+            set
+            {
+                stations = value;
+                OnPropertyChanged("Stations");
+            }
+        }
         #endregion
-
 
         #region Methods
 

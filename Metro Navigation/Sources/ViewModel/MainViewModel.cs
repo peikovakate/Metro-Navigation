@@ -9,16 +9,26 @@ namespace Metro_Navigation.Sources.ViewModel
         private const string CONNECTIONS_PATH = "data/connections.csv";
         private const string STATIONS_PATH = "data/stations.csv";
 
+        public Metro MetroNavig { get; private set; }
+
         public MainViewModel()
         {
-            Metro metro = new Metro();
+
+            MetroNavig = new Metro();
 
             string path = AppDomain.CurrentDomain.BaseDirectory;
 
-            metro.ConnectionsSrc = path + CONNECTIONS_PATH;
-            metro.NamesSrc = path + STATIONS_PATH;
-            metro.LoadData();
-            metro.GO(7, 21);
+            MetroNavig.ConnectionsSrc = path + CONNECTIONS_PATH;
+            MetroNavig.NamesSrc = path + STATIONS_PATH;
+            MetroNavig.LoadData();
+
+            //foreach (var item in metro.stations)
+            //{
+            //    MetroC.AddStation(item.Id, item.Name, item.XPosition, item.YPosition);
+            //}
+
+
+
         }
     }
 }

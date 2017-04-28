@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Metro_Navigation.Sources.Model
+namespace Metro_Navigation.Sources
 {
-    class Station
+    public class Station
     {
         public string Name { get; set; }
         public double XPosition { get; set; }

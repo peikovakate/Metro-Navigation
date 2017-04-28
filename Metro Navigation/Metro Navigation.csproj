@@ -60,7 +60,7 @@
     </ApplicationDefinition>
     <Compile Include="Sources\Model\BreadthFirstSearch.cs" />
     <Compile Include="Sources\Model\GraphAdjList.cs" />
-    <Compile Include="Sources\Model\Station.cs" />
+    <Compile Include="Sources\Station.cs" />
     <Compile Include="Sources\ViewModel\Command.cs" />
     <Compile Include="Sources\ViewModel\MainViewModel.cs" />
     <Compile Include="Sources\View\MetroControl.xaml.cs">
