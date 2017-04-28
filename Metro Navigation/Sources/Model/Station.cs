@@ -9,8 +9,9 @@ namespace Metro_Navigation.Sources.Model
     class Station
     {
         public string Name { get; set; }
-        float XPosition { get; set; }
-        float YPosition { get; set; }
-        int Line { get; set; }
+        public double XPosition { get; set; }
+        public double YPosition { get; set; }
+        public int Line { get; set; }
+        public ushort Id { get; set; }
     }
 }

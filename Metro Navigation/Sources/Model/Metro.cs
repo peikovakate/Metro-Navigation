@@ -24,7 +24,7 @@ namespace Metro_Navigation.Sources.Model
                 if (namesSrc != value)
                 {
                     namesSrc = value;
-                    names = new Dictionary<ushort, string>();
+                    stations = new List<Station>();
                 }
             }
         }
@@ -41,7 +41,7 @@ namespace Metro_Navigation.Sources.Model
             }
         }
 
-        private Dictionary<ushort, string> names;
+        private List<Station> stations;
         private Dictionary<ushort, ushort> connections;
         private GraphAdjList graph;
 
@@ -65,16 +65,22 @@ namespace Metro_Navigation.Sources.Model
             {
                 parser.TextFieldType = FieldType.Delimited;
                 parser.SetDelimiters(";");
-               
                 while (!parser.EndOfData)
                 {
                     string[] fields = parser.ReadFields();
-                    names.Add(Convert.ToUInt16(fields[0]), fields[1]);
-                    
+                    Station s = new Station()
+                    {
+                        Id = Convert.ToUInt16(fields[0]),
+                        Name = fields[1],
+                        Line = Convert.ToInt32(fields[2]),
+                        XPosition = Convert.ToDouble(fields[3]),
+                        YPosition = Convert.ToDouble(fields[4])
+                    };
+                    stations.Add(s);
                 }
             }
 
-            graph = new GraphAdjList(names.Count);
+            graph = new GraphAdjList(stations.Count);
 
             using (TextFieldParser parser = new TextFieldParser(connectionsSrc))
             {

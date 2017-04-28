@@ -11,5 +11,7 @@ namespace Metro_Navigation.Sources.View
         {
             InitializeComponent();
         }
+
+
     }
 }
