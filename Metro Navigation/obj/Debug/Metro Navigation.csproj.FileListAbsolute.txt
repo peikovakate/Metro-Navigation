@@ -16,3 +16,4 @@ E:\tt\Metro Navigation\Metro Navigation\bin\Debug\data\connections.csv
 E:\tt\Metro Navigation\Metro Navigation\obj\Debug\Sources\View\StationControl.g.cs
 E:\tt\Metro Navigation\Metro Navigation\obj\Debug\GeneratedInternalTypeHelper.g.cs
 E:\tt\Metro Navigation\Metro Navigation\obj\Debug\Sources\View\StationControl.baml
+E:\tt\Metro Navigation\Metro Navigation\obj\Debug\Metro Navigation.csprojResolveAssemblyReference.cache

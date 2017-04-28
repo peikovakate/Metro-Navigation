@@ -1,54 +1,54 @@
-﻿Akademmistechko,1
-Zhytomyrska,1
-Sviatoshyn,1
-Nyvky,1
-Beresteiska,1
-Shuliavska,1
-Politekhnichnyi Instytut,1
-Vokzalna,1
-Universytet,1
-Teatralna,1
-Khreshchatyk,1
-Arsenalna,1
-Dnipro,1
-Hidropark,1
-Livoberezhna,1
-Darnytsia,1
-Chernihivska,1
-Lisova,1
-Heroiv Dnipra,2
-Minska,2
-Obolon,2
-Petrivka,2
-Tarasa Shevchenka,2
-Kontraktova Ploshcha,2
-Poshtova Ploshcha,2
-Maidan Nezalezhnosti,2
-Ploshcha Lva Tolstoho,2
-Olimpiiska,2
-Palats "Ukrayina",2
-Lybidska,2
-Demiivska,2
-Holosiivska,2
-Vasylkivska,2
-Vystavkovyi Tsentr,2
-Ipodrom,2
-Teremky,2
-Syrets,3
-Dorohozhychi,3
-Lukianivska,3
-Lvivska Brama,3 
-Zoloti Vorota,3
-Palats Sportu,3
-Klovska,3
-Pecherska,3
-Druzhby Narodiv,3
-Vydubychi,3
-Telychka,3
-Slavutych,3
-Osokorky,3
-Pozniaky,3
-Kharkivska,3
-Vyrlytsia,3
-Boryspilska,3
-Chervony Khutir,3
+1;Akademmistechko;1;0.05;0.5
+2;Zhytomyrska;1;0.1;0.5
+3;Sviatoshyn;1;0.15;0.5
+4;Nyvky;1;0.2;0.5
+5;Beresteiska;1;0.25;0.5
+6;Shuliavska;1;0.3;0.5
+7;Politekhnichnyi Instytut;1;0.35;0.5
+8;Vokzalna;1;0.4;0.5
+9;Universytet;1;0.45;0.5
+10;Teatralna;1;0.5;0.5
+11;Khreshchatyk;1;5;0.5
+12;Arsenalna;1;0.6;0.5
+13;Dnipro;1;0.65;0.5
+14;Hidropark;1;0.7;0.5
+15;Livoberezhna;1;0.75;0.5
+16;Darnytsia;1;0.8;0.5
+17;Chernihivska;1;0.85;0.5
+18;Lisova;1;0.9;0.5
+19;Heroiv Dnipra;2;0.5;0.05
+20;Minska;2;0.5;0.1
+21;Obolon;2;0.5;0.15
+22;Petrivka;2;0.5;0.2
+23;Tarasa Shevchenka;2;0.5;0.25
+24;Kontraktova Ploshcha;2;0.5;0.3
+25;Poshtova Ploshcha;2;0.5;0.35
+26;Maidan Nezalezhnosti;2;0.5;0.4
+27;Ploshcha Lva Tolstoho;2;0.5;0.45
+28;Olimpiiska;2;0.5;0.5
+29;Palats Ukrayina;2;0.5;0.55
+30;Lybidska;2;0.5;0.6
+31;Demiivska;2;0.5;0.65
+32;Holosiivska;2;0.5;0.7
+33;Vasylkivska;2;0.5;0.75
+34;Vystavkovyi Tsentr;2;0.5;0.8
+35;Ipodrom;2;0.5;0.85
+36;Teremky;2;0.5;0.9
+37;Syrets;3;0.1;0.1
+38;Dorohozhychi;3;0.15;0.15
+39;Lukianivska;3;0.2;0.2
+40;Lvivska Brama;3;0.25;0.25
+41;Zoloti Vorota;3;0.3;0.3
+42;Palats Sportu;3;0.35;0.35
+43;Klovska;3;0.4;0.4
+44;Pecherska;3;0.45;0.45
+45;Druzhby Narodiv;3;0.5;0.5
+46;Vydubychi;3;0.55;0.55
+47;Telychka;3;0.6;0.6
+48;Slavutych;3;0.65;0.65
+49;Osokorky;3;0.7;0.7
+50;Pozniaky;3;0.75;0.75
+51;Kharkivska;3;0.8;0.8
+52;Vyrlytsia;3;0.85;0.85
+53;Boryspilska;3;0.9;0.9
+54;Chervony Khutir;3;0.95;0.95

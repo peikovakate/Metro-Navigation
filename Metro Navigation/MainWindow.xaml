@@ -10,7 +10,7 @@
     <Grid>
         <s:StationControl
             StationName="FUGIHOJ" 
-            StationColor="AliceBlue"
+            StationColor="Red"
             Width="100"
             Height="100"
             ></s:StationControl>

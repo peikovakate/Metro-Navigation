@@ -64,13 +64,13 @@ namespace Metro_Navigation.Sources.Model
             using (TextFieldParser parser = new TextFieldParser(namesSrc))
             {
                 parser.TextFieldType = FieldType.Delimited;
-                parser.SetDelimiters(",");
-                ushort iterator = 0;
+                parser.SetDelimiters(";");
+               
                 while (!parser.EndOfData)
                 {
                     string[] fields = parser.ReadFields();
-                    names.Add(iterator, fields[0]);
-                    iterator++;
+                    names.Add(Convert.ToUInt16(fields[0]), fields[1]);
+                    
                 }
             }
 
@@ -79,7 +79,7 @@ namespace Metro_Navigation.Sources.Model
             using (TextFieldParser parser = new TextFieldParser(connectionsSrc))
             {
                 parser.TextFieldType = FieldType.Delimited;
-                parser.SetDelimiters(",");
+                parser.SetDelimiters(";");
                 while (!parser.EndOfData)
                 {
                     string[] fields = parser.ReadFields();        
