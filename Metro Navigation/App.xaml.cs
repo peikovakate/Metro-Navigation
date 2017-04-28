@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
+using Metro_Navigation.Sources.View;
+using Metro_Navigation.Sources.ViewModel;
 
 namespace Metro_Navigation
 {
@@ -13,5 +9,15 @@ namespace Metro_Navigation
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+        var mw = new MainWindow
+        {
+            DataContext = new MainViewModel()
+        };
+
+        mw.Show();
+        }
+
     }
 }

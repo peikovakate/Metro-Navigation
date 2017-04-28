@@ -15,13 +15,16 @@ using System.Windows.Shapes;
 using Metro_Navigation.Sources.Model;
 using System.Reflection;
 
-namespace Metro_Navigation
+namespace Metro_Navigation.Sources.View
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
     {
+        private const string CONNECTIONS_PATH = "data/connections.csv";
+        private const string STATIONS_PATH = "data/stations.csv";
+
         public MainWindow()
         {
             InitializeComponent();
@@ -29,10 +32,8 @@ namespace Metro_Navigation
 
             string path = AppDomain.CurrentDomain.BaseDirectory;
 
-
-
-            metro.ConnectionsSrc = "data/connections.csv";
-            metro.NamesSrc = path+ "data/stations.csv";
+            metro.ConnectionsSrc = path + CONNECTIONS_PATH;
+            metro.NamesSrc = path + STATIONS_PATH;
             metro.LoadData();
             metro.GO(7, 21);
         }
