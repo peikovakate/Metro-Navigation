@@ -17,6 +17,7 @@
             Width="600"
             Height="600"
             StationsList="{Binding Path=MetroNavig.Stations}"
+            ConnectionsList="{Binding Path=MetroNavig.Connections}"
             >
             
         </s:MetroControl>

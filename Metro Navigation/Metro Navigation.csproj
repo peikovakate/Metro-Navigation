@@ -58,17 +58,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Sources\Connection.cs" />
     <Compile Include="Sources\Model\BreadthFirstSearch.cs" />
     <Compile Include="Sources\Model\GraphAdjList.cs" />
     <Compile Include="Sources\Station.cs" />
     <Compile Include="Sources\ViewModel\Command.cs" />
     <Compile Include="Sources\ViewModel\MainViewModel.cs" />
+    <Compile Include="Sources\View\ConnectionControl.xaml.cs">
+      <DependentUpon>ConnectionControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Sources\View\MetroControl.xaml.cs">
       <DependentUpon>MetroControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Sources\View\StationControl.xaml.cs">
       <DependentUpon>StationControl.xaml</DependentUpon>
     </Compile>
+    <Page Include="Sources\View\ConnectionControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Sources\View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -109,6 +117,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="data\lines.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

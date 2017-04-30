@@ -19,3 +19,6 @@ E:\tt\Metro Navigation\Metro Navigation\obj\Debug\Metro Navigation.csproj.Genera
 E:\tt\Metro Navigation\Metro Navigation\obj\Debug\Metro Navigation.exe
 E:\tt\Metro Navigation\Metro Navigation\obj\Debug\Metro Navigation.pdb
 E:\tt\Metro Navigation\Metro Navigation\obj\Debug\Metro Navigation.csprojResolveAssemblyReference.cache
+E:\tt\Metro Navigation\Metro Navigation\bin\Debug\data\lines.csv
+E:\tt\Metro Navigation\Metro Navigation\obj\Debug\Sources\View\ConnectionControl.g.cs
+E:\tt\Metro Navigation\Metro Navigation\obj\Debug\Sources\View\ConnectionControl.baml

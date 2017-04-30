@@ -4,6 +4,8 @@ using Microsoft.VisualBasic.FileIO;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Windows.Media;
+
 
 namespace Metro_Navigation.Sources.Model
 {
@@ -34,8 +36,9 @@ namespace Metro_Navigation.Sources.Model
 
         #region Properties
 
-        private Dictionary<ushort, ushort> connections;
         private GraphAdjList graph;
+        private Dictionary<int, Color> linesColors;
+        private Dictionary<ushort, Station> stationsById;
 
         private string namesSrc;
         public string NamesSrc
@@ -45,7 +48,8 @@ namespace Metro_Navigation.Sources.Model
                 if (namesSrc != value)
                 {
                     namesSrc = value;
-                    stations = new ObservableCollection<Station>();  
+                    stations = new ObservableCollection<Station>();
+                    stationsById = new Dictionary<ushort, Station>(); 
                 }
             }
         }
@@ -57,13 +61,23 @@ namespace Metro_Navigation.Sources.Model
                 if (connectionsSrc != value)
                 {
                     connectionsSrc = value;
-                    connections = new Dictionary<ushort, ushort>();
+                    connections = new ObservableCollection<Connection>();
                 }
             }
         }
 
-        private ObservableCollection<Station> stations;
+        private string linesSrc;
+        public string LinesSrc
+        {
+            get { return linesSrc; }
+            set
+            {
+                linesSrc = value;
+                linesColors = new Dictionary<int, Color>();
+            }
+        }
 
+        private ObservableCollection<Station> stations;
         public ObservableCollection<Station> Stations
         {
             get { return stations; }
@@ -73,9 +87,21 @@ namespace Metro_Navigation.Sources.Model
                 OnPropertyChanged("Stations");
             }
         }
+
+        private ObservableCollection<Connection> connections;
+        public ObservableCollection<Connection> Connections
+        {
+            get { return connections; }
+            set
+            {
+                connections = value;
+                OnPropertyChanged("Connections");
+            }
+        }
+
         #endregion
 
-        #region Methods
+        #region Public methods
 
         public void LoadData()
         {
@@ -87,7 +113,44 @@ namespace Metro_Navigation.Sources.Model
             {
                 throw new System.ArgumentException("ConnectionsSrc is uninitialized");
             }
+            if(linesSrc == null)
+            {
+                throw new System.ArgumentException("LineSrc is uninitialized");
+            }
 
+            loadLinesData();
+            loadStationsData();
+            graph = new GraphAdjList(stations.Count);
+
+            loadConnectionsData();
+        }
+
+        public void GO(ushort a, ushort b)
+        {
+            BreadthFirstSearch bfs = new BreadthFirstSearch(graph);
+            var path = bfs.BFS(7, 21); 
+        }
+        #endregion
+
+        #region Private Methods
+        private void loadLinesData()
+        {
+            using (TextFieldParser parser = new TextFieldParser(linesSrc))
+            {
+                parser.TextFieldType = FieldType.Delimited;
+                parser.SetDelimiters(";");
+                while (!parser.EndOfData)
+                {
+                    string[] fields = parser.ReadFields();
+                    linesColors.Add(Convert.ToInt32(fields[0]),
+                        Color.FromArgb(255, Convert.ToByte(fields[1]), Convert.ToByte(fields[2]), Convert.ToByte(fields[3])));
+                        
+                }
+            }
+        }
+
+        private void loadStationsData()
+        {
             using (TextFieldParser parser = new TextFieldParser(namesSrc))
             {
                 parser.TextFieldType = FieldType.Delimited;
@@ -99,34 +162,42 @@ namespace Metro_Navigation.Sources.Model
                     {
                         Id = Convert.ToUInt16(fields[0]),
                         Name = fields[1],
-                        Line = Convert.ToInt32(fields[2]),
+                        LineColor = linesColors[Convert.ToInt32(fields[2])],
                         XPosition = Convert.ToDouble(fields[3]),
                         YPosition = Convert.ToDouble(fields[4])
                     };
                     stations.Add(s);
+                    stationsById.Add(s.Id, s);
                 }
             }
+        }
 
-            graph = new GraphAdjList(stations.Count);
-
+        private void loadConnectionsData()
+        {
             using (TextFieldParser parser = new TextFieldParser(connectionsSrc))
             {
                 parser.TextFieldType = FieldType.Delimited;
                 parser.SetDelimiters(";");
                 while (!parser.EndOfData)
                 {
-                    string[] fields = parser.ReadFields();        
-                    //connections.Add(Convert.ToUInt16(fields[0]), Convert.ToUInt16(fields[1]));
-                    graph.AddEdge(Convert.ToUInt16(fields[0]), Convert.ToUInt16(fields[1]));
+                    string[] fields = parser.ReadFields();
+                    Connection c = new Connection()
+                    {
+                        A = Convert.ToUInt16(fields[0]),
+                        B = Convert.ToUInt16(fields[1]),
+                        Type = fields[2] == "t" ? ConnectionType.Train : ConnectionType.Pedestrian,
+                    };
+                    if(stationsById[c.A].LineColor == stationsById[c.B].LineColor)
+                    {
+                        c.ConnectionColor = stationsById[c.A].LineColor;
+                    }else
+                    {
+                        c.ConnectionColor = Colors.Gray;
+                    }
+                    connections.Add(c);
+                    graph.AddEdge(c.A, c.B);
                 }
             }
-        }
-
-        public void GO(ushort a, ushort b)
-        {
-            BreadthFirstSearch bfs = new BreadthFirstSearch(graph);
-            var path = bfs.BFS(7, 21);
-            
         }
         #endregion
     }

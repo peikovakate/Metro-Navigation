@@ -8,6 +8,7 @@ namespace Metro_Navigation.Sources.ViewModel
     {
         private const string CONNECTIONS_PATH = "data/connections.csv";
         private const string STATIONS_PATH = "data/stations.csv";
+        private const string LINES_PATH = "data/lines.csv";
 
         public Metro MetroNavig { get; private set; }
 
@@ -20,6 +21,7 @@ namespace Metro_Navigation.Sources.ViewModel
 
             MetroNavig.ConnectionsSrc = path + CONNECTIONS_PATH;
             MetroNavig.NamesSrc = path + STATIONS_PATH;
+            MetroNavig.LinesSrc = path + LINES_PATH;
             MetroNavig.LoadData();
 
             //foreach (var item in metro.stations)
