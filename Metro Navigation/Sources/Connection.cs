@@ -11,9 +11,9 @@ namespace Metro_Navigation.Sources
 
     public class Connection
     {
-        public ushort A { get; set; }
-        public ushort B { get; set; }
-        public Color ConnectionColor {get; set;}
-        public ConnectionType Type { get; set; }
+        public ushort A { get; set; } //station id
+        public ushort B { get; set; } //station id
+        public Color ConnectionColor { get; set; } //in most cases the color of line
+        public ConnectionType Type { get; set; } //can be train or pedestrian
     }
 }

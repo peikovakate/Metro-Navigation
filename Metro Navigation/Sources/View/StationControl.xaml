@@ -7,13 +7,51 @@
              mc:Ignorable="d"
              x:Name="SControl"
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        
+        <Storyboard x:Key="Animate" RepeatBehavior="Forever">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="backCircle">
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0"/>
+            </DoubleAnimationUsingKeyFrames>
+
+            <DoubleAnimationUsingKeyFrames 
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" 
+                Storyboard.TargetName="backCircle">
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1.7">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ExponentialEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+
+            <DoubleAnimationUsingKeyFrames 
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" 
+                Storyboard.TargetName="backCircle">
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1.7">
+                    <EasingDoubleKeyFrame.EasingFunction>
+                        <ExponentialEase EasingMode="EaseIn"/>
+                    </EasingDoubleKeyFrame.EasingFunction>
+                </EasingDoubleKeyFrame>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        
+    </UserControl.Resources>
+    
     <Grid>
         <Ellipse 
+            x:Name="backCircle"
             Fill="{Binding Path=StationColor, ElementName=SControl}" 
-           />
-        <TextBlock Text="{Binding Path=StationName, ElementName=SControl}" 
-                   HorizontalAlignment="Center" 
-                   VerticalAlignment="Center"></TextBlock>
+            RenderTransformOrigin="0.5,0.5">
+
+            <Ellipse.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                </TransformGroup>
+            </Ellipse.RenderTransform>
+        </Ellipse>
         
+        <Ellipse 
+            Fill="{Binding Path=StationColor, ElementName=SControl}"/>
+
     </Grid>
 </UserControl>

@@ -1,6 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 namespace Metro_Navigation.Sources.View
 {
@@ -30,9 +32,19 @@ namespace Metro_Navigation.Sources.View
         public StationControl()
         {
             InitializeComponent();
-            
+
         }
 
+        public void StartAnimation()
+        {
+            Storyboard s = (Storyboard)TryFindResource("Animate");
+            s.Begin(this);
+        }
 
+        public void EndAnimation()
+        {
+            Storyboard s = (Storyboard)TryFindResource("Animate");
+            s.Stop();
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 using Metro_Navigation.Sources.Model;
-
+using System.Windows.Input;
 
 namespace Metro_Navigation.Sources.ViewModel
 {
@@ -12,10 +12,12 @@ namespace Metro_Navigation.Sources.ViewModel
 
         public Metro MetroNavig { get; private set; }
 
+        public ICommand Navigate { get; set; }
+
         public MainViewModel()
         {
-
             MetroNavig = new Metro();
+            Navigate = new Command(arg => PassStationsToMetro(arg));
 
             string path = AppDomain.CurrentDomain.BaseDirectory;
 
@@ -24,13 +26,11 @@ namespace Metro_Navigation.Sources.ViewModel
             MetroNavig.LinesSrc = path + LINES_PATH;
             MetroNavig.LoadData();
 
-            //foreach (var item in metro.stations)
-            //{
-            //    MetroC.AddStation(item.Id, item.Name, item.XPosition, item.YPosition);
-            //}
+        }
 
-
-
+        private void PassStationsToMetro(object a)
+        {
+            ushort[] ab = (ushort[])a;
         }
     }
 }
