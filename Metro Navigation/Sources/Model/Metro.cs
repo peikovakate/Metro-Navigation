@@ -49,7 +49,8 @@ namespace Metro_Navigation.Sources.Model
                 {
                     namesSrc = value;
                     stations = new ObservableCollection<Station>();
-                    stationsById = new Dictionary<ushort, Station>(); 
+                    stationsById = new Dictionary<ushort, Station>();
+                    names = new ObservableCollection<string>();
                 }
             }
         }
@@ -96,6 +97,17 @@ namespace Metro_Navigation.Sources.Model
             {
                 connections = value;
                 OnPropertyChanged("Connections");
+            }
+        }
+
+        private ObservableCollection<string> names;
+        public ObservableCollection<string> Names
+        {
+            get { return names; }
+            set
+            {
+                names = value;
+                OnPropertyChanged("Names");
             }
         }
 
@@ -167,6 +179,7 @@ namespace Metro_Navigation.Sources.Model
                         YPosition = Convert.ToDouble(fields[4])
                     };
                     stations.Add(s);
+                    names.Add(s.Name);
                     stationsById.Add(s.Id, s);
                 }
             }

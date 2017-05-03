@@ -9,6 +9,7 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Linq;
 
 namespace Metro_Navigation.Sources.View
 {
@@ -20,6 +21,7 @@ namespace Metro_Navigation.Sources.View
         public MetroControl()
         {
             InitializeComponent();
+            names = new Dictionary<string, ushort>();
             stations = new Dictionary<ushort, StationControl>();
             ids = new Dictionary<StationControl, ushort>();
             connectionLines = new List<Line>();
@@ -38,22 +40,23 @@ namespace Metro_Navigation.Sources.View
             PopupWindow.IsOpen = false;
             Border border = new Border();
             border.Background = new SolidColorBrush(Colors.Gray);
-            border.Child = new Label() { Foreground = new SolidColorBrush(Colors.White) };
+            border.Child = new Label() {
+                Foreground = new SolidColorBrush(Colors.White),
+                FontFamily = new FontFamily("Century Gothic") };
             PopupWindow.Child = border;
             BackgroundGrid.Children.Add(PopupWindow);
 
-            
+            AB = new ushort[2];
         }
 
         #endregion
 
         #region Properties
 
-        private static StationControl stationA;
-        private static StationControl stationB;
-
         public static ushort[] AB { get; set; }
- 
+
+        private static Dictionary<string, ushort> names;
+
 
         private const double StationW = 25;
         private static Canvas stationsCanvas;
@@ -151,31 +154,16 @@ namespace Metro_Navigation.Sources.View
             };
             s.MouseEnter += S_MouseEnter;
             s.MouseLeave += S_MouseLeave;
-            s.MouseDown += S_MouseDown;
 
             stations.Add(id, s);
             ids.Add(s, id);
             Canvas.SetLeft(s, w * xPosition);
             Canvas.SetTop(s, w * yPosition);
             stationsCanvas.Children.Add(s);
+
+            names.Add(name, id);
         }
 
-        private static void S_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            StationControl s = sender as StationControl;
-            if(stationA == null)
-            {
-                stationA = s;
-                s.StartAnimation();
-            }
-            else if(stationA!= s && stationB == null)
-            {
-                stationB = s;
-                AB = new ushort[] { ids[stationA], ids[stationB] };
-                s.StartAnimation();
-            }
-            
-        }
 
         //this methods closes pop-up border when user's cursors leaves station mark
         private static void S_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
@@ -197,6 +185,27 @@ namespace Metro_Navigation.Sources.View
                 PopupWindow.HorizontalOffset = Canvas.GetLeft(s);
                 PopupWindow.VerticalOffset = Canvas.GetTop(s)-30;
             }
+        }
+
+
+        public static void SetA(string stationName)
+        {
+            if (AB[0] != 0)
+            {
+                stations[AB[0]].EndAnimation();
+            }
+            AB[0] = names[stationName];
+            stations[AB[0]].StartAnimation();
+        }
+
+        public static void SetB(string stationName)
+        {
+            if (AB[1] != 0)
+            {
+                stations[AB[1]].EndAnimation();
+            }
+            AB[1] = names[stationName];
+            stations[AB[1]].StartAnimation();
         }
 
         #endregion

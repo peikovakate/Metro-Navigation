@@ -22,3 +22,4 @@ E:\tt\Metro Navigation\Metro Navigation\obj\Debug\Metro Navigation.csprojResolve
 E:\tt\Metro Navigation\Metro Navigation\bin\Debug\data\lines.csv
 E:\tt\Metro Navigation\Metro Navigation\obj\Debug\Sources\View\ConnectionControl.g.cs
 E:\tt\Metro Navigation\Metro Navigation\obj\Debug\Sources\View\ConnectionControl.baml
+E:\tt\Metro Navigation\Metro Navigation\obj\Debug\Sources\View\Styles.baml
