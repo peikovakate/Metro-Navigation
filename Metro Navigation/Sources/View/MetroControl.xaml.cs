@@ -2,14 +2,10 @@
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-
-using System.Collections.Specialized;
-using System;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using System.Linq;
 
 namespace Metro_Navigation.Sources.View
 {
@@ -53,6 +49,7 @@ namespace Metro_Navigation.Sources.View
             Canvas.SetTop(train, 0);
             Canvas.SetLeft(train, 0);
             Canvas trainCanvas = new Canvas();
+            train.Visibility = Visibility.Collapsed;
             BackgroundGrid.Children.Add(trainCanvas);
             trainCanvas.Children.Add(train);
         }
@@ -67,13 +64,15 @@ namespace Metro_Navigation.Sources.View
         private const double StationW = 25;
         private static Canvas stationsCanvas;
         private static Canvas connectionsCanvas;
-
+        
+        //pop-ups name of the station
         private static Popup PopupWindow;
 
         private static Dictionary<ushort, StationControl> stations;
         private static Dictionary<StationControl, ushort> ids;
         private static List<Line> connectionLines;
 
+        //control for animating navigation
         private static Train train;
 
         public ObservableCollection<Station> StationsList
@@ -164,6 +163,8 @@ namespace Metro_Navigation.Sources.View
         private static void OnPathDependencyChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             var n = e.NewValue as ObservableCollection<ushort>;
+            train.Visibility = Visibility.Visible;
+            //calculating points for train animation
             var path = new List<Point>();
             foreach (var id in n)
             {
@@ -174,12 +175,14 @@ namespace Metro_Navigation.Sources.View
                 path.Add(p);
             }
             train.PointsToPath = path;
+            //starts train animation
             train.StartMoving();
         }
 
         #endregion
 
         #region Methods
+        //adds staion to map
         private static void AddStation(ushort id, string name, double xPosition, double yPosition, Color color, double w)
         {
             StationControl s = new StationControl()
@@ -223,8 +226,8 @@ namespace Metro_Navigation.Sources.View
                 PopupWindow.VerticalOffset = Canvas.GetTop(s) - 30;
             }
         }
-
-
+        
+        //sets station A
         public static void SetA(string stationName)
         {
             if (AB[0] != 0)
@@ -235,6 +238,7 @@ namespace Metro_Navigation.Sources.View
             stations[AB[0]].StartAnimation();
         }
 
+        //sets station B
         public static void SetB(string stationName)
         {
             if (AB[1] != 0)

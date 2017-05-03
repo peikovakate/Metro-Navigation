@@ -18,8 +18,7 @@
                                   Direction="360" 
                                   ShadowDepth="0" 
                                   BlurRadius="5" 
-                                  Opacity="0.5" 
-                                  />
+                                  Opacity="0.5" />
             </Setter.Value>
         </Setter>
 

@@ -37,11 +37,16 @@
             <TextBlock 
                 Style = "{StaticResource TitleText}"
                 Text = "METRO" 
-                Grid.Row = "0" Margin="0,0,0,47" VerticalAlignment="Top"/>
+                Grid.Row = "0" 
+                Margin="0,0,0,47" 
+                VerticalAlignment="Top"/>
             <TextBlock 
                 Style = "{StaticResource TitleText}"
                 Text = "NAVIGATION" 
-                Grid.Row = "0" Margin="0,35,0,0" VerticalAlignment="Top"/>
+                Grid.Row = "0" 
+                Margin="0,35,0,0" 
+                VerticalAlignment="Top"/>
+            
             <StackPanel
                 Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center">
                 <TextBlock
@@ -62,7 +67,7 @@
                     Style="{StaticResource StationBox}"
                     SelectionChanged="ComboBox_SelectionChanged"/>
             </StackPanel>
-            
+
             <Button
                 Grid.Row="2"
                 Style="{StaticResource GoButtonStyle}" Background="#FFCDCDCD">
@@ -70,7 +75,6 @@
                     Style="{StaticResource GOLabel}"
                     Content="GO"/>
             </Button>
-
         </Grid>
 
         <s:MetroControl 

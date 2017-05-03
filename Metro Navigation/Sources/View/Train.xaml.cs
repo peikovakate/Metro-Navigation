@@ -1,24 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Metro_Navigation.Sources.View
 {
-    /// <summary>
-    /// Interaction logic for Train.xaml
-    /// </summary>
     public partial class Train : UserControl
     {
         Storyboard storyboard;
@@ -54,7 +41,6 @@ namespace Metro_Navigation.Sources.View
                 ky.KeyTime = TimeSpan.FromSeconds(i);
                 ky.EasingFunction = ease;
                 animY.KeyFrames.Add(ky);
-                //ease.Amplitude = 3;
             }
             
             Storyboard.SetTargetProperty(animX, 

@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using Microsoft.VisualBasic.FileIO;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
 using System.Windows.Media;
-
 
 namespace Metro_Navigation.Sources.Model
 {

@@ -13,8 +13,6 @@ namespace Metro_Navigation.Sources.Model
             edgesTo = new Dictionary<ushort, List<ushort>>();
             distTo = new Dictionary<ushort, int>();
             g = G;
-
-
         }
 
         public List<ushort> BFS(ushort a, ushort b)

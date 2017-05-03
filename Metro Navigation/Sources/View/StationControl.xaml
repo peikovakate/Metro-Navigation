@@ -43,8 +43,7 @@
             x:Name="backCircle"
             Fill="{Binding Path=StationColor, ElementName=SControl}" 
             RenderTransformOrigin="0.5,0.5"
-            Opacity="0"
-            >
+            Opacity="0">
 
             <Ellipse.RenderTransform>
                 <TransformGroup>

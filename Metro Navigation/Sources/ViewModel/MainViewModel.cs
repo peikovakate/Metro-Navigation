@@ -28,6 +28,7 @@ namespace Metro_Navigation.Sources.ViewModel
 
         }
 
+        //passes start and destionation stations to model
         private void PassStationsToMetro(object a)
         {
             ushort[] ab = (ushort[])a;

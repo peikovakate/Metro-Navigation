@@ -10,7 +10,6 @@ namespace Metro_Navigation.Sources.View
             InitializeComponent();
         }
 
-
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var c = sender as ComboBox;

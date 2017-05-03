@@ -1,14 +1,10 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 
 namespace Metro_Navigation.Sources.View
 {
-    /// <summary>
-    /// Interaction logic for StationControl.xaml
-    /// </summary>
     public partial class StationControl : UserControl
     {
         public static readonly DependencyProperty StationNameDependency =
@@ -32,7 +28,6 @@ namespace Metro_Navigation.Sources.View
         public StationControl()
         {
             InitializeComponent();
-
         }
 
         public void StartAnimation()
