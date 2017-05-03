@@ -14,15 +14,16 @@ namespace Metro_Navigation.Sources.Model
             distTo = new Dictionary<ushort, int>();
             g = G;
 
-            foreach(var vertex in G.GetVertexes())
-            {
-                distTo[vertex] = -1;
-                edgesTo[vertex] = new List<ushort>();
-            }
+
         }
 
         public List<ushort> BFS(ushort a, ushort b)
         {
+            foreach (var vertex in g.GetVertexes())
+            {
+                distTo[vertex] = -1;
+                edgesTo[vertex] = new List<ushort>();
+            }
             var queue = new Queue<ushort>();
             queue.Enqueue(a);
             distTo[a] = 0;
@@ -42,6 +43,7 @@ namespace Metro_Navigation.Sources.Model
 
                         if(w == b)
                         {
+                            edgesTo[w].Add(w);
                             return edgesTo[w];
                         } 
                     }

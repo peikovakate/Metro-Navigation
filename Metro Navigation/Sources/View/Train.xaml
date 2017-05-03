@@ -1,0 +1,25 @@
+﻿<UserControl x:Name="userControl" x:Class="Metro_Navigation.Sources.View.Train"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Metro_Navigation.Sources.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"
+             Width="20"
+             Height="20" 
+             RenderTransformOrigin="0.5,0.5">
+    <UserControl.RenderTransform>
+        <TransformGroup>
+            <ScaleTransform/>
+            <SkewTransform/>
+            <RotateTransform/>
+            <TranslateTransform/>
+        </TransformGroup>
+    </UserControl.RenderTransform>
+
+    <Ellipse
+            Fill="Black">
+    </Ellipse>
+
+</UserControl>

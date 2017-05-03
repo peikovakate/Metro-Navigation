@@ -38,7 +38,7 @@ namespace Metro_Navigation.Sources.View
         public void StartAnimation()
         {
             Storyboard s = (Storyboard)TryFindResource("Animate");
-            s.Begin(this);
+            s.Begin();
         }
 
         public void EndAnimation()

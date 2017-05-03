@@ -37,6 +37,7 @@ namespace Metro_Navigation.Sources.Model
         #region Properties
 
         private GraphAdjList graph;
+        private BreadthFirstSearch bfs;
         private Dictionary<int, Color> linesColors;
         private Dictionary<ushort, Station> stationsById;
 
@@ -111,6 +112,17 @@ namespace Metro_Navigation.Sources.Model
             }
         }
 
+        private ObservableCollection<ushort> path;
+        public ObservableCollection<ushort> Path
+        {
+            get { return path; }
+            set
+            {
+                path = value;
+                OnPropertyChanged("Path");
+            }
+        }
+
         #endregion
 
         #region Public methods
@@ -135,12 +147,12 @@ namespace Metro_Navigation.Sources.Model
             graph = new GraphAdjList(stations.Count);
 
             loadConnectionsData();
+            bfs = new BreadthFirstSearch(graph);
         }
 
         public void GO(ushort a, ushort b)
         {
-            BreadthFirstSearch bfs = new BreadthFirstSearch(graph);
-            var path = bfs.BFS(7, 21); 
+            Path = new ObservableCollection<ushort>(bfs.BFS(a, b));
         }
         #endregion
 

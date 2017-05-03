@@ -40,13 +40,21 @@ namespace Metro_Navigation.Sources.View
             PopupWindow.IsOpen = false;
             Border border = new Border();
             border.Background = new SolidColorBrush(Colors.Gray);
-            border.Child = new Label() {
+            border.Child = new Label()
+            {
                 Foreground = new SolidColorBrush(Colors.White),
-                FontFamily = new FontFamily("Century Gothic") };
+                FontFamily = new FontFamily("Century Gothic")
+            };
             PopupWindow.Child = border;
             BackgroundGrid.Children.Add(PopupWindow);
 
             AB = new ushort[2];
+            train = new Train();
+            Canvas.SetTop(train, 0);
+            Canvas.SetLeft(train, 0);
+            Canvas trainCanvas = new Canvas();
+            BackgroundGrid.Children.Add(trainCanvas);
+            trainCanvas.Children.Add(train);
         }
 
         #endregion
@@ -54,9 +62,7 @@ namespace Metro_Navigation.Sources.View
         #region Properties
 
         public static ushort[] AB { get; set; }
-
         private static Dictionary<string, ushort> names;
-
 
         private const double StationW = 25;
         private static Canvas stationsCanvas;
@@ -68,6 +74,8 @@ namespace Metro_Navigation.Sources.View
         private static Dictionary<StationControl, ushort> ids;
         private static List<Line> connectionLines;
 
+        private static Train train;
+
         public ObservableCollection<Station> StationsList
         {
             get { return (ObservableCollection<Station>)GetValue(StationsListDependency); }
@@ -76,13 +84,22 @@ namespace Metro_Navigation.Sources.View
                 SetValue(StationsListDependency, value);
             }
         }
-        
+
         public ObservableCollection<Connection> ConnectionsList
         {
-            get { return (ObservableCollection<Connection>)GetValue(StationsListDependency); }
+            get { return (ObservableCollection<Connection>)GetValue(ConnectionsListDependency); }
             set
             {
-                SetValue(StationsListDependency, value);
+                SetValue(ConnectionsListDependency, value);
+            }
+        }
+
+        public ObservableCollection<ushort> StationPath
+        {
+            get { return (ObservableCollection<ushort>)GetValue(PathDependency); }
+            set
+            {
+                SetValue(PathDependency, value);
             }
         }
 
@@ -123,21 +140,41 @@ namespace Metro_Navigation.Sources.View
                     {
                         StrokeThickness = 3,
                         Stroke = new SolidColorBrush(c.ConnectionColor),
-                        X1 = Canvas.GetLeft(stations[c.A])+ StationW/2,
-                        Y1 = Canvas.GetTop(stations[c.A])+ StationW / 2,
-                        X2 = Canvas.GetLeft(stations[c.B])+ StationW / 2,
-                        Y2 = Canvas.GetTop(stations[c.B])+ StationW / 2
+                        X1 = Canvas.GetLeft(stations[c.A]) + StationW / 2,
+                        Y1 = Canvas.GetTop(stations[c.A]) + StationW / 2,
+                        X2 = Canvas.GetLeft(stations[c.B]) + StationW / 2,
+                        Y2 = Canvas.GetTop(stations[c.B]) + StationW / 2
                     };
                     //if connection is for pedestrians, it will be dashed on the map
-                    if(c.Type == ConnectionType.Pedestrian)
+                    if (c.Type == ConnectionType.Pedestrian)
                     {
-                        line.StrokeDashArray = new DoubleCollection(new double[] {1, 2});
+                        line.StrokeDashArray = new DoubleCollection(new double[] { 1, 2 });
                         line.StrokeDashCap = PenLineCap.Round;
                     }
                     connectionsCanvas.Children.Add(line);
                     connectionLines.Add(line);
                 }
             }
+        }
+
+        public static readonly DependencyProperty PathDependency =
+            DependencyProperty.Register("StationPath", typeof(ObservableCollection<ushort>), typeof(MetroControl),
+                new FrameworkPropertyMetadata(null, OnPathDependencyChanged));
+
+        private static void OnPathDependencyChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            var n = e.NewValue as ObservableCollection<ushort>;
+            var path = new List<Point>();
+            foreach (var id in n)
+            {
+                Point p = new Point();
+                var s = stations[id];
+                p.X = Canvas.GetLeft(s) + s.Width / 2 - train.Width / 2;
+                p.Y = Canvas.GetTop(s) + s.Height / 2 - train.Height / 2;
+                path.Add(p);
+            }
+            train.PointsToPath = path;
+            train.StartMoving();
         }
 
         #endregion
@@ -174,7 +211,7 @@ namespace Metro_Navigation.Sources.View
         //this methods opens pop-up border when user's cursor is on the station mark
         private static void S_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            if (!PopupWindow.IsOpen && sender!=null)
+            if (!PopupWindow.IsOpen && sender != null)
             {
                 PopupWindow.IsOpen = true;
                 StationControl s = sender as StationControl;
@@ -183,7 +220,7 @@ namespace Metro_Navigation.Sources.View
                 l.Content = s.StationName;
                 var point = Mouse.GetPosition(Application.Current.MainWindow);
                 PopupWindow.HorizontalOffset = Canvas.GetLeft(s);
-                PopupWindow.VerticalOffset = Canvas.GetTop(s)-30;
+                PopupWindow.VerticalOffset = Canvas.GetTop(s) - 30;
             }
         }
 

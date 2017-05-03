@@ -73,6 +73,9 @@
     <Compile Include="Sources\View\StationControl.xaml.cs">
       <DependentUpon>StationControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Sources\View\Train.xaml.cs">
+      <DependentUpon>Train.xaml</DependentUpon>
+    </Compile>
     <Page Include="Sources\View\ConnectionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -98,6 +101,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Sources\View\Styles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Sources\View\Train.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

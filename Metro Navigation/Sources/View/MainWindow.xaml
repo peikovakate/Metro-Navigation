@@ -26,7 +26,8 @@
         </Grid.ColumnDefinitions>
         
         <Grid 
-            Grid.Column="0" Background="#FF595050">
+            Grid.Column="0" 
+            Background="#FF595050">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -59,13 +60,12 @@
                 <ComboBox  
                     x:Name="ComboBoxB"
                     Style="{StaticResource StationBox}"
-                    SelectionChanged="ComboBox_SelectionChanged" BorderThickness="0"/>
-
+                    SelectionChanged="ComboBox_SelectionChanged"/>
             </StackPanel>
+            
             <Button
                 Grid.Row="2"
-                Style="{StaticResource GoButtonStyle}" Background="#FFCDCDCD"
-                >
+                Style="{StaticResource GoButtonStyle}" Background="#FFCDCDCD">
                 <Label
                     Style="{StaticResource GOLabel}"
                     Content="GO"/>
@@ -80,7 +80,8 @@
             Height="600"
             StationsList="{Binding Path=MetroNavig.Stations}"
             ConnectionsList="{Binding Path=MetroNavig.Connections}"
-            >
+            StationPath = "{Binding Path=MetroNavig.Path}">
         </s:MetroControl>
+        
     </Grid>
 </Window>
