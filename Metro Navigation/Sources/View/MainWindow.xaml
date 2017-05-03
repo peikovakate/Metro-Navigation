@@ -58,6 +58,7 @@
                 <ComboBox
                     x:Name="ComboBoxA"
                     Style="{StaticResource StationBox}"
+                    
                     SelectionChanged="ComboBox_SelectionChanged"/>
                 <TextBlock 
                     Text="To" 

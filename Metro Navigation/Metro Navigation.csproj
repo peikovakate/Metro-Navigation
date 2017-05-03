@@ -64,9 +64,6 @@
     <Compile Include="Sources\Station.cs" />
     <Compile Include="Sources\ViewModel\Command.cs" />
     <Compile Include="Sources\ViewModel\MainViewModel.cs" />
-    <Compile Include="Sources\View\ConnectionControl.xaml.cs">
-      <DependentUpon>ConnectionControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Sources\View\MetroControl.xaml.cs">
       <DependentUpon>MetroControl.xaml</DependentUpon>
     </Compile>
@@ -76,10 +73,6 @@
     <Compile Include="Sources\View\Train.xaml.cs">
       <DependentUpon>Train.xaml</DependentUpon>
     </Compile>
-    <Page Include="Sources\View\ConnectionControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Sources\View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -152,6 +145,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\train.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\pedestrian.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

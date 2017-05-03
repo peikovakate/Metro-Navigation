@@ -34,5 +34,6 @@ namespace Metro_Navigation.Sources.ViewModel
             ushort[] ab = (ushort[])a;
             MetroNavig.GO(ab[0], ab[1]);
         }
+
     }
 }

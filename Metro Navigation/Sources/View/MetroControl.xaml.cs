@@ -6,11 +6,12 @@ using System.Windows.Media;
 using System.Windows.Shapes;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Linq;
 
 namespace Metro_Navigation.Sources.View
 {
     public partial class MetroControl : UserControl
-    {
+    {   
 
         #region Constructor
 
@@ -61,7 +62,7 @@ namespace Metro_Navigation.Sources.View
         public static ushort[] AB { get; set; }
         private static Dictionary<string, ushort> names;
 
-        private const double StationW = 25;
+        private const double StationW = 20;
         private static Canvas stationsCanvas;
         private static Canvas connectionsCanvas;
         
@@ -70,6 +71,7 @@ namespace Metro_Navigation.Sources.View
 
         private static Dictionary<ushort, StationControl> stations;
         private static Dictionary<StationControl, ushort> ids;
+        private static List<Connection> connections;
         private static List<Line> connectionLines;
 
         //control for animating navigation
@@ -113,6 +115,9 @@ namespace Metro_Navigation.Sources.View
         {
             var n = e.NewValue as ObservableCollection<Station>;
             double w = (sender as MetroControl).ActualWidth;
+            stations.Clear();
+            ids.Clear();
+            stationsCanvas.Children.Clear();
             if (n != null)
             {
                 foreach (var item in n)
@@ -129,31 +134,7 @@ namespace Metro_Navigation.Sources.View
         private static void OnConnectionsListDependencyChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             var n = e.NewValue as ObservableCollection<Connection>;
-
-            if (n != null)
-            {
-                foreach (var c in n)
-                {
-                    //adding connections to map
-                    Line line = new Line()
-                    {
-                        StrokeThickness = 3,
-                        Stroke = new SolidColorBrush(c.ConnectionColor),
-                        X1 = Canvas.GetLeft(stations[c.A]) + StationW / 2,
-                        Y1 = Canvas.GetTop(stations[c.A]) + StationW / 2,
-                        X2 = Canvas.GetLeft(stations[c.B]) + StationW / 2,
-                        Y2 = Canvas.GetTop(stations[c.B]) + StationW / 2
-                    };
-                    //if connection is for pedestrians, it will be dashed on the map
-                    if (c.Type == ConnectionType.Pedestrian)
-                    {
-                        line.StrokeDashArray = new DoubleCollection(new double[] { 1, 2 });
-                        line.StrokeDashCap = PenLineCap.Round;
-                    }
-                    connectionsCanvas.Children.Add(line);
-                    connectionLines.Add(line);
-                }
-            }
+            AddConnections(n);
         }
 
         public static readonly DependencyProperty PathDependency =
@@ -166,15 +147,30 @@ namespace Metro_Navigation.Sources.View
             train.Visibility = Visibility.Visible;
             //calculating points for train animation
             var path = new List<Point>();
+     
             foreach (var id in n)
             {
                 Point p = new Point();
                 var s = stations[id];
                 p.X = Canvas.GetLeft(s) + s.Width / 2 - train.Width / 2;
-                p.Y = Canvas.GetTop(s) + s.Height / 2 - train.Height / 2;
+                p.Y = Canvas.GetTop(s) + s.Height / 2 - train.Height;
                 path.Add(p);
             }
+            var isPedestrian = new List<bool>();
+            for(int i=0; i<n.Count-1; i++)
+            {
+                isPedestrian.Add(false);
+                foreach (var item in connections)
+                {
+                    if(item.Type == ConnectionType.Pedestrian 
+                        && ((item.A == n[i] && item.B == n[i+1])
+                        || (item.B == n[i] && item.A == n[i + 1]))){
+                        isPedestrian[i] = true;
+                    }
+                }
+            }
             train.PointsToPath = path;
+            train.IsPedestrian = isPedestrian;
             //starts train animation
             train.StartMoving();
         }
@@ -205,6 +201,37 @@ namespace Metro_Navigation.Sources.View
         }
 
 
+        private static void AddConnections(ObservableCollection<Connection> n)
+        {
+            connectionsCanvas.Children.Clear();
+            connectionLines.Clear();
+            if (n != null)
+            {
+                connections = n.ToList();
+                foreach (var c in n)
+                {
+                    //adding connections to map
+                    Line line = new Line()
+                    {
+                        StrokeThickness = 3,
+                        Stroke = new SolidColorBrush(c.ConnectionColor),
+                        X1 = Canvas.GetLeft(stations[c.A]) + StationW / 2,
+                        Y1 = Canvas.GetTop(stations[c.A]) + StationW / 2,
+                        X2 = Canvas.GetLeft(stations[c.B]) + StationW / 2,
+                        Y2 = Canvas.GetTop(stations[c.B]) + StationW / 2
+                    };
+                    //if connection is for pedestrians, it will be dashed on the map
+                    if (c.Type == ConnectionType.Pedestrian)
+                    {
+                        line.StrokeDashArray = new DoubleCollection(new double[] { 1, 2 });
+                        line.StrokeDashCap = PenLineCap.Round;
+                    }
+                    connectionsCanvas.Children.Add(line);
+                    connectionLines.Add(line);
+                }
+            }
+        }
+
         //this methods closes pop-up border when user's cursors leaves station mark
         private static void S_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
@@ -234,8 +261,12 @@ namespace Metro_Navigation.Sources.View
             {
                 stations[AB[0]].EndAnimation();
             }
-            AB[0] = names[stationName];
-            stations[AB[0]].StartAnimation();
+
+            if (stationName!=null && names.ContainsKey(stationName))
+            {
+                AB[0] = names[stationName];
+                stations[AB[0]].StartAnimation();
+            }
         }
 
         //sets station B
@@ -245,8 +276,12 @@ namespace Metro_Navigation.Sources.View
             {
                 stations[AB[1]].EndAnimation();
             }
-            AB[1] = names[stationName];
-            stations[AB[1]].StartAnimation();
+
+            if (stationName != null && names.ContainsKey(stationName))
+            {
+                AB[1] = names[stationName];
+                stations[AB[1]].StartAnimation();
+            }
         }
 
         #endregion

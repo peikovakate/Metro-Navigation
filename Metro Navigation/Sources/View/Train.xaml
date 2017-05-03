@@ -6,9 +6,18 @@
              xmlns:local="clr-namespace:Metro_Navigation.Sources.View"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-             Width="20"
-             Height="20" 
+             Width="40"
+             Height="40" 
              RenderTransformOrigin="0.5,0.5">
+    <UserControl.Resources>
+        <ObjectAnimationUsingKeyFrames x:Key="ChangeToPedestrian" 
+                Storyboard.TargetProperty="(UIElement.Visibility)" 
+                Storyboard.TargetName="PedestrianImage">
+            <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+            <DiscreteObjectKeyFrame KeyTime="0:0:1" Value="{x:Static Visibility.Collapsed}"/>
+        </ObjectAnimationUsingKeyFrames>
+    </UserControl.Resources>
+
     <UserControl.RenderTransform>
         <TransformGroup>
             <ScaleTransform/>
@@ -17,9 +26,24 @@
             <TranslateTransform/>
         </TransformGroup>
     </UserControl.RenderTransform>
-
-    <Ellipse
-            Fill="Black">
-    </Ellipse>
-
+    
+    <Grid>
+    <Image x:Name="TrainImage">
+        <Image.Source>
+            <BitmapImage 
+                    UriSource="/Metro Navigation;component/Images/train.png" 
+                    DecodePixelWidth="40" 
+                    DecodePixelHeight="40"/>
+        </Image.Source>
+    </Image>
+    <Image x:Name="PedestrianImage" 
+           Visibility="Collapsed">
+        <Image.Source>
+            <BitmapImage 
+                UriSource="/Metro Navigation;component/Images/pedestrian.png" 
+                DecodePixelWidth="40" 
+                DecodePixelHeight="40"/>
+        </Image.Source>
+    </Image>
+    </Grid>
 </UserControl>

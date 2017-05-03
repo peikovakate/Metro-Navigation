@@ -16,11 +16,13 @@ namespace Metro_Navigation.Sources.View
         }
 
         public List<Point> PointsToPath { get; set; }
+        public List<bool> IsPedestrian { get; set; }
 
         public void StartMoving()
         {
             storyboard = new Storyboard();
             storyboard.SpeedRatio = 2;
+
             DoubleAnimationUsingKeyFrames animX = new DoubleAnimationUsingKeyFrames();
             animX.Duration = TimeSpan.FromSeconds(PointsToPath.Count);
             DoubleAnimationUsingKeyFrames animY = new DoubleAnimationUsingKeyFrames();
@@ -42,8 +44,26 @@ namespace Metro_Navigation.Sources.View
                 ky.EasingFunction = ease;
                 animY.KeyFrames.Add(ky);
             }
-            
-            Storyboard.SetTargetProperty(animX, 
+            var ChangeToPedestrianAnimation = new ObjectAnimationUsingKeyFrames();
+            for (int i = 0; i < IsPedestrian.Count; i++)
+            {     
+                if (IsPedestrian[i])
+                {
+                    var f = new DiscreteObjectKeyFrame();
+                    f.KeyTime = TimeSpan.FromSeconds(i);
+                    f.Value = Visibility.Visible;
+                    ChangeToPedestrianAnimation.KeyFrames.Add(f);
+                    f = new DiscreteObjectKeyFrame();
+                    f.KeyTime = TimeSpan.FromSeconds(i+1);
+                    f.Value = Visibility.Collapsed;
+                    ChangeToPedestrianAnimation.KeyFrames.Add(f);
+                }
+            }
+
+            Storyboard.SetTarget(ChangeToPedestrianAnimation, PedestrianImage);
+            Storyboard.SetTargetProperty(ChangeToPedestrianAnimation, new PropertyPath("Visibility"));
+
+            Storyboard.SetTargetProperty(animX,
                 new PropertyPath("(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)"));
             Storyboard.SetTarget(animX, this);
             Storyboard.SetTargetProperty(animY,
@@ -52,6 +72,7 @@ namespace Metro_Navigation.Sources.View
 
             storyboard.Children.Add(animX);
             storyboard.Children.Add(animY);
+            storyboard.Children.Add(ChangeToPedestrianAnimation);
             PointsToPath.Clear();
             storyboard.Begin();
         }
